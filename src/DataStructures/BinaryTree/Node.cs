@@ -9,48 +9,75 @@ namespace DataStructures.BinaryTree
     public class Node
     {
         private int _data;
-        public Node Left { get; set; }
-        public Node Right { get; set; }
+        private Node _left;
+        private Node _right;
 
-        public Node(int data) => _data = data;
+        internal Node(int data) => _data = data;
 
-        public void Add(Node node)
+        internal void Add(Node node)
         {
             if(node._data < this._data)
             {
-                if(this.Left is null)
+                if(this._left is null)
                 {
-                    this.Left = node;
+                    this._left = node;
                 }
                 else
                 {
-                    this.Left.Add(node);
+                    this._left.Add(node);
                 }
             }
             else
             {
-                if(this.Right is null)
+                if(this._right is null)
                 {
-                    this.Right = node;
+                    this._right = node;
                 }
                 else
                 {
-                    this.Right.Add(node);
+                    this._right.Add(node);
                 }
             }
         }
 
-        public void ForEach(Action<Node> action)
+        internal void ForEach(Action<Node> action)
         {
-            if(this.Left is not null)
+            if(this._left is not null)
             {
-                this.Left.ForEach(action);
+                this._left.ForEach(action);
             }
             action(this);
-            if(this.Right is not null)
+            if(this._right is not null)
             {
-                this.Right.ForEach(action);
+                this._right.ForEach(action);
             }
+        }
+
+        internal void Reverse()
+        {
+            if(this._left is null && this._right is null)
+            {
+                return;
+            }
+            else
+            {
+                this.Swap();
+                if(this._left is not null)
+                {
+                    this._left.Reverse();
+                }
+                if(this._right is not null)
+                {
+                    this._right.Reverse();
+                }
+            }
+        }
+
+        private void Swap()
+        {
+            var temp = this._left;
+            this._left = this._right;
+            this._right = temp;
         }
 
         public override string ToString() => _data.ToString();
