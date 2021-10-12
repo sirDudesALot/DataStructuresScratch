@@ -31,5 +31,14 @@ namespace DataStructures.BinaryTree
                 _root.ForEach(action);
             }
         }
+
+        public BinaryTree Reverse()
+        {
+            if(_root is not null)
+            {
+                _root.Reverse();
+            }
+            return this;
+        }
     }
 }

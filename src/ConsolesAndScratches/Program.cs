@@ -26,7 +26,17 @@ namespace ConsolesAndScratches
         {
             Console.WriteLine("Binary Tree");
             var tree = new BinaryTree();
-            tree.Add(4).Add(1).Add(7).Add(3);
+            var rand = new RandomNumberGenerator(10);
+            while(rand.HasNext())
+            {
+                var number = rand.Get();
+                tree.Add(number);
+                Console.Write($"{number} ");
+            }
+            Console.WriteLine();
+            tree.ForEach(n => Console.Write($"{n} "));
+            Console.WriteLine();
+            tree.Reverse();
             tree.ForEach(n => Console.Write($"{n} "));
         }
     }
